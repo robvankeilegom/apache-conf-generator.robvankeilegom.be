@@ -1,0 +1,21 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-6" (change)="updateCode()">
+        
+        <form [formGroup]="form">
+          <div class="form-group">
+            <label for="domain">Domain</label>
+            <input type="text" class="form-control" id="domain" formControlName="domain">
+          </div>
+          <div class="form-group">
+            <label for="domain">root</label>
+            <input type="text" class="form-control" id="root" formControlName="root">
+          </div>
+        </form>
+
+      </div>
+      <pre #codeEl class="col-6">
+      </pre>
+    </div>
+  </div>
+  

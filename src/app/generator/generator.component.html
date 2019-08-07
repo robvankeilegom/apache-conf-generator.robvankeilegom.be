@@ -1,22 +1,36 @@
-<div class="container mt-5">
-    <div class="row">
-      <div class="col-6" (change)="updateCode()">
-        <h2>Settings:</h2>
-        <form [formGroup]="form">
-          <div class="form-group">
-            <label for="domain">Domain</label>
-            <input type="text" class="form-control" id="domain" formControlName="domain">
-          </div>
-          <div class="form-group">
-            <label for="domain">root</label>
-            <input type="text" class="form-control" id="root" formControlName="root">
-          </div>
-        </form>
-
-        <h2>Hosts update:</h2>
-        <pre>{{ this.hostFile }}</pre>
-      </div>
-      <pre #codeEl class="col-6">
-      </pre>
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-4">
+      <h2>Settings:</h2>
+      <form [formGroup]="form">
+        <div class="form-group">
+          <label for="domain">Domain</label>
+          <input type="text" class="form-control" id="domain" formControlName="domain">
+        </div>
+        <div class="form-group">
+          <label for="symlink">root (symlink)</label>
+          <input type="text" class="form-control" id="symlink" formControlName="symlink">
+        </div>
+        <div class="form-group">
+          <label for="root">source</label>
+          <input type="text" class="form-control" id="root" formControlName="root">
+        </div>
+        <div class="form-group">
+          <label for="apache">config location</label>
+          <input type="text" class="form-control" id="apache" formControlName="apache">
+        </div>
+      </form>
     </div>
+
+    <div class="col-4">
+      <h2>Hosts update:</h2>
+      <pre>{{ this.hostFile }}</pre>
+      <h2>symlink:</h2>
+      <pre>{{ this.symlink }}</pre>
+      <h2>enable config:</h2>
+      <pre>{{ this.enableConfig }}</pre>
+    </div>
+    <pre #codeEl class="col-4">
+      </pre>
   </div>
+</div>

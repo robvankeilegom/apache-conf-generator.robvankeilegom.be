@@ -11,20 +11,24 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
 
   public form: FormGroup;
   public hostFile: string;
+  public symlink: string;
+  public enableConfig: string;
 
   constructor(private formBuilder: FormBuilder) { }
 
   public ngOnInit() {
     this.form = this.formBuilder.group({
       domain: 'example.com',
-      root: '/var/www/html'
+      symlink: '/var/www/html/',
+      root: '/home/user/websites/example.com/public',
+      apache: '/etc/apache2/sites-available/',
     });
 
     this.form.valueChanges.subscribe(val => {
       this.updateCode();
-      this.updateHostfile();
+      this.updateExtras();
     });
-    this.updateHostfile();
+    this.updateExtras();
   }
 
   public ngAfterViewInit(): void {
@@ -34,17 +38,17 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   public updateCode(): void {
     const code = document.createElement('code');
     code.className = 'html';
-    const text = document.createTextNode(`<VirtualHost *:80>
+    const text = document.createTextNode(`sudo sh -c 'echo "<VirtualHost *:80>
     ServerName ${ this.form.value.domain }
     ServerAlias www.${ this.form.value.domain }
 
     ServerAdmin webmaster@localhost
-    DocumentRoot ${ this.form.value.root }
+    DocumentRoot ${ this.form.value.symlink }${ this.form.value.domain }
 
     ErrorLog $\{APACHE_LOG_DIR\}/error.log
     CustomLog $\{APACHE_LOG_DIR\}/access.log combined
 
-    <Directory "${ this.form.value.root }">
+    <Directory "${ this.form.value.symlink }${ this.form.value.domain }">
       Options Indexes FollowSymLinks MultiViews
       Allow from all
       AllowOverride All
@@ -52,7 +56,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       Options +Indexes
     </Directory>
 
-  </VirtualHost>`);
+  </VirtualHost>" > ${ this.form.value.apache }${ this.form.value.domain }.conf'`);
 
     this.codeEl.nativeElement.innerHTML = '';
     code.appendChild(text);
@@ -60,7 +64,9 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
 
   }
 
-  public updateHostfile(): void {
-    this.hostFile = `echo "127.0.0.1  ${ this.form.value.domain }" >> /etc/hosts`;
+  public updateExtras(): void {
+    this.hostFile = `sudo sh -c 'echo "127.0.0.1  ${ this.form.value.domain }" >> /etc/hosts'`;
+    this.symlink = `ln -s  ${ this.form.value.root } ${ this.form.value.symlink }${ this.form.value.domain }`;
+    this.enableConfig = `sudo a2ensite ${ this.form.value.domain }.conf`;
   }
 }

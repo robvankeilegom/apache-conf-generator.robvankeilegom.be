@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div class="row">
       <div class="col-6" (change)="updateCode()">
-        
+        <h2>Settings:</h2>
         <form [formGroup]="form">
           <div class="form-group">
             <label for="domain">Domain</label>
@@ -13,9 +13,10 @@
           </div>
         </form>
 
+        <h2>Hosts update:</h2>
+        <pre>{{ this.hostFile }}</pre>
       </div>
       <pre #codeEl class="col-6">
       </pre>
     </div>
   </div>
-  

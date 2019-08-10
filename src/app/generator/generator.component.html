@@ -8,6 +8,10 @@
           <input type="text" class="form-control" id="domain" formControlName="domain">
         </div>
         <div class="form-group">
+          <div class="form-check float-right">
+            <input type="checkbox" class="form-check-input" id="autoppend" [checked]="autoAppend" (change)="checked($event)">
+            <label class="form-check-label" for="autoappend">Append /public to symlink</label>
+          </div>
           <label for="symlink">root (symlink)</label>
           <input type="text" class="form-control" id="symlink" formControlName="symlink">
         </div>
@@ -21,7 +25,7 @@
         </div>
       </form>
     </div>
-
+    
     <div class="col-4">
       <h2>Hosts update:</h2>
       <pre>{{ this.hostFile }}</pre>
@@ -31,6 +35,6 @@
       <pre>{{ this.enableConfig }}</pre>
     </div>
     <pre #codeEl class="col-4">
-      </pre>
+    </pre>
   </div>
 </div>

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "apache-config-generator": {
+    "apache-conf-generator": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apache-config-generator",
+            "outputPath": "dist/apache-conf-generator",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,18 +68,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "apache-config-generator:build"
+            "browserTarget": "apache-conf-generator:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "apache-config-generator:build:production"
+              "browserTarget": "apache-conf-generator:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "apache-config-generator:build"
+            "browserTarget": "apache-conf-generator:build"
           }
         },
         "test": {
@@ -116,15 +116,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "apache-config-generator:serve"
+            "devServerTarget": "apache-conf-generator:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "apache-config-generator:serve:production"
+              "devServerTarget": "apache-conf-generator:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "apache-config-generator"
+  "defaultProject": "apache-conf-generator"
 }

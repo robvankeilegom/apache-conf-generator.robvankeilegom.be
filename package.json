@@ -1,5 +1,5 @@
 {
-  "name": "apache-config-generator",
+  "name": "apache-conf-generator",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

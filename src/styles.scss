@@ -1,4 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
-body {
-  background-color: #6fde8d;
+@import "~pattern.css/pattern";
+
+* {
+  color: black;
+}
+
+body > div {
+  width: 100vw;
+  height: 100vh;
+  padding: 50px 0;
+
+  &.front {
+    color: #e7393f;
+  }
+  &.bg {
+    background-color: #ff8710;
+  }
 }

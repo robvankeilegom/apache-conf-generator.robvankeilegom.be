@@ -27,14 +27,40 @@
     </div>
 
     <div class="col-lg-7 col-md-12">
-      <h2>Hosts:</h2>
-      <pre>{{ this.hostFile }}</pre>
-      <h2>Symlink:</h2>
-      <pre>{{ this.symlink }}</pre>
-      <h2>Vhost:</h2>
-      <pre>{{ this.enableConfig }}</pre>
-      <pre #codeEl class="col-12">
+      <h2>
+        Hosts:
+
+        <button class="btn clipboard-button" data-clipboard-target="#txthosts">
+          <img src="" alt="Copy">
+        </button>
+      </h2>
+      <pre id="txthosts">{{ this.hostFile }}</pre>
+
+      <h2>
+        Symlink:
+
+        <button class="btn clipboard-button" data-clipboard-target="#txtsymlink">
+          <img src="" alt="Copy">
+        </button>
+      </h2>
+      <pre id="txtsymlink">{{ this.symlink }}</pre>
+      <h2>
+        Vhost:
+
+        <button class="btn clipboard-button" data-clipboard-target="#txtvhost">
+          <img src="" alt="Copy">
+        </button>
+      </h2>
+      <pre id="txtvhost" #codeEl class="col-12">
       </pre>
+      <h2>
+        Enable vhost:
+
+        <button class="btn clipboard-button" data-clipboard-target="#txtenable">
+          <img src="" alt="Copy">
+        </button>
+      </h2>
+      <pre id="txtenable">{{ this.enableConfig }}</pre>
     </div>
   </div>
 </div>

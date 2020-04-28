@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import ClipboardJS from 'clipboard';
 
 @Component({
   selector: 'app-generator',
@@ -30,6 +31,8 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       this.updateExtras();
     });
     this.updateExtras();
+
+    new ClipboardJS('.clipboard-button');
   }
 
   public ngAfterViewInit(): void {

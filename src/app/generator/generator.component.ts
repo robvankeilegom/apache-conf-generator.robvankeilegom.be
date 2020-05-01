@@ -54,8 +54,8 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     ServerAdmin webmaster@localhost
     DocumentRoot ${ this.form.value.symlink }${ domain }
 
-    ErrorLog $\{APACHE_LOG_DIR\}/error.log
-    CustomLog $\{APACHE_LOG_DIR\}/access.log combined
+    ErrorLog \\$\{APACHE_LOG_DIR\}/error.log
+    CustomLog \\$\{APACHE_LOG_DIR\}/access.log combined
 
     <Directory "${ this.form.value.symlink }${ domain }">
       Options Indexes FollowSymLinks MultiViews

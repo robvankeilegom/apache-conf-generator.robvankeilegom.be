@@ -4,6 +4,19 @@
             <h2>Settings:</h2>
             <form [formGroup]="form">
                 <div class="form-group">
+                    <div class="form-check float-right">
+                        <input
+                            type="checkbox"
+                            class="form-check-input"
+                            id="redirectHttps"
+                            [checked]="redirectHttps"
+                            (change)="checked($event, 'redirectHttps')"
+                        >
+                        <label
+                            class="form-check-label"
+                            for="redirectHttps"
+                        >Redirect to https</label>
+                    </div>
                     <label for="domain">Domain</label>
                     <input
                         type="text"
@@ -17,9 +30,9 @@
                         <input
                             type="checkbox"
                             class="form-check-input"
-                            id="autoppend"
+                            id="autoappend"
                             [checked]="autoAppend"
-                            (change)="checked($event)"
+                            (change)="checked($event, 'autoAppend')"
                         >
                         <label
                             class="form-check-label"

@@ -15,6 +15,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   public symlink: string;
   public enableConfig: string;
   public autoAppend: boolean = true;
+  public redirectHttps: boolean = false;
 
   constructor ( private formBuilder: FormBuilder ) { }
 
@@ -66,10 +67,21 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       </Directory>
     `;
 
-  </VirtualHost>" > ${ this.form.value.apache}${this.form.value.domain}.conf'` );
+    if ( this.redirectHttps ) {
+      text += `
+      RewriteEngine on
+      RewriteCond %{HTTPS} off
+      RewriteRule ^(.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301]
+      `;
+    }
+
+    text += `
+    </VirtualHost>" > ${this.form.value.apache}${this.form.value.domain}.conf'`;
+
+    const textNode = document.createTextNode( text );
 
     this.codeEl.nativeElement.innerHTML = '';
-    code.appendChild( text );
+    code.appendChild( textNode );
     this.codeEl.nativeElement.appendChild( code );
 
   }
@@ -80,8 +92,12 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     this.enableConfig = `sudo a2ensite ${this.form.value.domain}.conf`;
   }
 
-  public checked ( value ): void {
-    this.autoAppend = value.target.checked;
+  public checked ( value, target: 'autoAppend' | 'redirectHttps' ): void {
+    if ( target === 'autoAppend' ) {
+      this.autoAppend = value.target.checked;
+    } else if ( target === 'redirectHttps' ) {
+      this.redirectHttps = value.target.checked;
+    }
     this.updateCode();
   }
 }

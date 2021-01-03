@@ -76,7 +76,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     }
 
     text += `
-    </VirtualHost>" > ${this.form.value.apache}${this.form.value.domain}.conf'`;
+    </VirtualHost>" > ${this.form.value.apache}000-${this.form.value.domain}.conf'`;
 
     const textNode = document.createTextNode( text );
 

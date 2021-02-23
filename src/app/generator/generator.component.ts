@@ -2,6 +2,8 @@ import { Component, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angula
 import { FormGroup, FormBuilder } from '@angular/forms';
 import ClipboardJS from 'clipboard';
 
+declare const window: any;
+
 @Component( {
   selector: 'app-generator',
   templateUrl: './generator.component.html',
@@ -83,6 +85,8 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
     this.codeEl.nativeElement.innerHTML = '';
     code.appendChild( textNode );
     this.codeEl.nativeElement.appendChild( code );
+
+    window.umami( 'Update Code' );
 
   }
 

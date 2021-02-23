@@ -1,6 +1,8 @@
 @import "~pattern.css/pattern";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
-* {
+*, pre {
+  font-family: 'Montserrat', sans-serif;
   color: black;
 }
 

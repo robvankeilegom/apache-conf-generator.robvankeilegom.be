@@ -10,7 +10,7 @@ declare const window: any;
   styleUrls: [ './generator.component.scss' ]
 } )
 export class GeneratorComponent implements OnInit, AfterViewInit {
-  @ViewChild( 'codeEl', { static: false } ) codeEl: ElementRef;
+  @ViewChild('codeEl') codeEl: ElementRef;
 
   public form: FormGroup;
   public hostFile: string;

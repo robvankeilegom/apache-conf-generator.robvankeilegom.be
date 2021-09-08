@@ -93,7 +93,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   public updateExtras (): void {
     this.hostFile = `sudo sh -c 'echo "127.0.0.1  ${this.form.value.domain}" >> /etc/hosts'`;
     this.symlink = `sudo ln -s  ${this.form.value.root} ${this.form.value.symlink}${this.form.value.domain}`;
-    this.enableConfig = `sudo a2ensite ${this.form.value.domain}.conf`;
+    this.enableConfig = `sudo a2ensite 000-${this.form.value.domain}.conf`;
   }
 
   public checked ( value, target: 'autoAppend' | 'redirectHttps' ): void {

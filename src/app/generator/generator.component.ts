@@ -10,7 +10,7 @@ declare const window: any;
   styleUrls: [ './generator.component.scss' ]
 } )
 export class GeneratorComponent implements OnInit, AfterViewInit {
-  @ViewChild('codeEl') codeEl: ElementRef;
+  @ViewChild( 'codeEl' ) codeEl: ElementRef;
 
   public form: FormGroup;
   public hostFile: string;
@@ -19,7 +19,7 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
   public autoAppend: boolean = true;
   public redirectHttps: boolean = false;
 
-  constructor ( private formBuilder: FormBuilder ) { }
+  constructor ( private formBuilder: FormBuilder ) {}
 
   public ngOnInit () {
     this.form = this.formBuilder.group( {
@@ -51,16 +51,16 @@ export class GeneratorComponent implements OnInit, AfterViewInit {
       domain += '/public';
     }
     let text = `sudo sh -c 'echo "<VirtualHost *:80>
-      ServerName ${ this.form.value.domain}
-      ServerAlias www.${ this.form.value.domain}
+      ServerName ${this.form.value.domain}
+      ServerAlias www.${this.form.value.domain}
 
       ServerAdmin webmaster@localhost
-      DocumentRoot ${ this.form.value.symlink}${domain}
+      DocumentRoot ${this.form.value.symlink}${domain}
 
       ErrorLog \\$\{APACHE_LOG_DIR\}/${this.form.value.domain}-error.log
       CustomLog \\$\{APACHE_LOG_DIR\}/${this.form.value.domain}-access.log combined
 
-      <Directory "${ this.form.value.symlink}${domain}">
+      <Directory "${this.form.value.symlink}${domain}">
         Options Indexes FollowSymLinks MultiViews
         Allow from all
         AllowOverride All

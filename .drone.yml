@@ -28,6 +28,5 @@ steps:
       - mkdir -p ~/.ssh && touch ~/.ssh/known_hosts
       - ssh-keyscan -p $SSH_PORT robvankeilegom.be >> ~/.ssh/known_hosts
       - mkdir -p ~/.ssh
-      - rsync -av -e "ssh -p $SSH_PORT" /drone/src/build/ |
-          $SSH_USER@robvankeilegom.be:~/websites/apache-conf-generator.robvankeilegom.be/current --delete
+      - rsync -av -e "ssh -p $SSH_PORT" /drone/src/build/ $SSH_USER@robvankeilegom.be:~/websites/apache-conf-generator.robvankeilegom.be/current --delete
 

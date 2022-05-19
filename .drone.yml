@@ -7,10 +7,23 @@ trigger:
     - master
 
 steps:
-  - name: Build
+  - name: Restore cache
+    image: drillster/drone-volume-cache
+    restore: true
+    mount:
+      - ./.yarn-cache
+      - ./node_modules
+    volumes:
+      - /tmp/yarn-cache:/cache
+
+  - name: Install packages
     image: node:16.14.2
     commands:
-      - yarn
+      - yarn config set cache-folder .yarn-cache
+      - yarn install --pure-lockfile
+
+  - name: Build
+    image: node:16.14.2
       - ./node_modules/.bin/ng build --configuration production --output-path /drone/src/build
 
   - name: Upload

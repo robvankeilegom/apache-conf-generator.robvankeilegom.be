@@ -1,0 +1,45 @@
+---
+kind: pipeline
+name: default
+
+trigger:
+  branch:
+    - master
+
+steps:
+  - name: Update submodules
+    image: alpine/git
+    environment:
+      SSH_KEY:
+        from_secret: drone_ssh_key
+    commands:
+      - eval `ssh-agent -s`
+      - echo "$SSH_KEY" | ssh-add -
+      - mkdir -p ~/.ssh && touch ~/.ssh/known_hosts
+      - ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - git submodule update --init --recursive
+
+  - name: Build
+    image: node
+    commands:
+      - yarn
+      - ./node_modules/.bin/ng build --configuration production --output-path /drone/src/build
+
+  - name: Upload
+    image: robvankeilegom/ssh-rsync
+    environment:
+      SSH_KEY:
+        from_secret: drone_ssh_key
+      SSH_USER:
+        from_secret: drone_ssh_user
+      SSH_PORT:
+        from_secret: drone_ssh_port
+    commands:
+      - eval `ssh-agent -s`
+      - echo "$SSH_KEY" | ssh-add -
+      - mkdir -p ~/.ssh && touch ~/.ssh/known_hosts
+      - ssh-keyscan -p $SSH_PORT robvankeilegom.be >> ~/.ssh/known_hosts
+      - mkdir -p ~/.ssh
+      - rsync -av -e "ssh -p $SSH_PORT" /drone/src/build/ |
+          $SSH_USER@robvankeilegom.be:~/websites/apache-conf-generator.robvankeilegom.be/current --delete
+

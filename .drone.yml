@@ -25,6 +25,7 @@ steps:
 
   - name: Build
     image: node:16.14.2
+    commands:
       - ./node_modules/.bin/ng build --configuration production --output-path /drone/src/build
 
   - name: Upload

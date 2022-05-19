@@ -7,20 +7,8 @@ trigger:
     - master
 
 steps:
-  - name: Update submodules
-    image: alpine/git
-    environment:
-      SSH_KEY:
-        from_secret: drone_ssh_key
-    commands:
-      - eval `ssh-agent -s`
-      - echo "$SSH_KEY" | ssh-add -
-      - mkdir -p ~/.ssh && touch ~/.ssh/known_hosts
-      - ssh-keyscan github.com >> ~/.ssh/known_hosts
-      - git submodule update --init --recursive
-
   - name: Build
-    image: node
+    image: node:16.14.2
     commands:
       - yarn
       - ./node_modules/.bin/ng build --configuration production --output-path /drone/src/build

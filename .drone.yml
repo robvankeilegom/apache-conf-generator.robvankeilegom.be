@@ -1,8 +1,6 @@
 ---
 kind: pipeline
 name: Deploy
-depends_on:
-  - Default
 
 trigger:
   event:

@@ -44,7 +44,7 @@ steps:
       - |
         rsync -av \
         -e "ssh -p $SSH_PORT" \
-        /drone/src/dist/ \
+        /drone/src/dist/apache-conf-generator/ \
         $SSH_USER@apache-conf-generator.robvankeilegom.be:~/websites/apache-conf-generator.robvankeilegom.be/current/
     depends_on:
       - Build assets
